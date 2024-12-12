@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -24,7 +25,12 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'warn',
@@ -42,6 +48,7 @@ module.exports = {
         ],
       },
     ],
+    'max-len': ['warn', { ignoreComments: true }],
     'no-underscore-dangle': 'off',
     'implicit-arrow-linebreak': 'warn',
     'i18next/no-literal-string': ['error', { markupOnly: true }],
