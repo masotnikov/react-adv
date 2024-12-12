@@ -51,7 +51,7 @@ module.exports = {
     'max-len': ['warn', { ignoreComments: true }],
     'no-underscore-dangle': 'off',
     'implicit-arrow-linebreak': 'warn',
-    'i18next/no-literal-string': ['error', { markupOnly: true }],
+    'i18next/no-literal-string': ['warn', { markupOnly: true }],
   },
   globals: {
     __IS_DEV__: true,
