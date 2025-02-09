@@ -1,3 +1,4 @@
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import webpack, { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -15,6 +16,10 @@ export function buildPlugins({ paths, isDev }: BuildOptions): Configuration['plu
     }),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
+    }),
+    isDev && new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      analyzerPort: 8080,
     }),
   ];
 }

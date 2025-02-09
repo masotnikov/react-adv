@@ -11,12 +11,18 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "paths": {
-      "*" : ["./src/*"]
+      "*": [
+        "./src/*"
+      ]
     }
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
-  }
+  },
+  "include": [
+    "./config/jest/setupTest.ts",
+    "./src/**/*"
+  ]
 }

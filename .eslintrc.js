@@ -23,6 +23,7 @@ module.exports = {
     'i18next',
   ],
   rules: {
+    'arrow-body-style': ['warn', 'always'],
     'linebreak-style': 0,
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [
@@ -42,18 +43,23 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'warn',
       {
-        devDependencies: [
-          '**/webpack.config.ts',
-          '**/config/build/*',
-        ],
+        projectDependencies: false,
       },
     ],
-    'max-len': ['warn', { ignoreComments: true }],
+    'max-len': ['warn', {ignoreComments: true}, {code: 120}],
     'no-underscore-dangle': 'off',
     'implicit-arrow-linebreak': 'warn',
-    'i18next/no-literal-string': ['warn', { markupOnly: true }],
+    'i18next/no-literal-string': ['warn', {markupOnly: true, ignoreAttribute: ['data-testid']}],
   },
   globals: {
     __IS_DEV__: true,
   },
+  overrides: [
+    {
+      files: ['**/src/**/*.test.{ts,tsx}'],
+      rules: {
+        'i18next/no-literal-string': 'off',
+      },
+    },
+  ],
 };
