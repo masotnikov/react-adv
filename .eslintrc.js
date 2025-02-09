@@ -43,13 +43,19 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'warn',
       {
-        projectDependencies: false,
+        devDependencies: [
+          '**/webpack.config.ts',
+          '**/config/build/*',
+          '**/config/jest/*',
+          '**/*.test.ts',
+          '**/*.test.tsx',
+        ],
       },
     ],
-    'max-len': ['warn', {ignoreComments: true}, {code: 120}],
+    'max-len': ['warn', { ignoreComments: true }, { code: 120 }],
     'no-underscore-dangle': 'off',
     'implicit-arrow-linebreak': 'warn',
-    'i18next/no-literal-string': ['warn', {markupOnly: true, ignoreAttribute: ['data-testid']}],
+    'i18next/no-literal-string': ['warn', { markupOnly: true, ignoreAttribute: ['data-testid'] }],
   },
   globals: {
     __IS_DEV__: true,
