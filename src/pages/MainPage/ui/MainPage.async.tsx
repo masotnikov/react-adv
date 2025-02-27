@@ -1,10 +1,16 @@
 import { lazy } from 'react';
 
-export const MainPageAsync = lazy(() => new Promise((resolve) => {
-  setTimeout(
-    () =>
+export const MainPageAsync = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(
+      () =>
       // @ts-ignore
-      resolve(import('./MainPage')),
-    2000,
-  );
-}));
+      // eslint-disable-next-line brace-style
+      {
+        // @ts-ignore
+        return resolve(import('./MainPage'));
+      },
+      2000,
+    );
+  });
+});

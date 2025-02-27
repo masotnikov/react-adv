@@ -36,7 +36,9 @@ export function buildLoaders({ isDev }: BuildOptions): ModuleOptions['rules'] {
         loader: 'css-loader',
         options: {
           modules: {
-            auto: (resPath: string) => Boolean(resPath.includes('.module.')),
+            auto: (resPath: string) => {
+              return Boolean(resPath.includes('.module.'));
+            },
             localIdentName: isDev ? '[path][name]--[local]--[hash:base64:4]' : '[hash:base64:8]',
           },
         },
