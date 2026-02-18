@@ -39,5 +39,10 @@
     "compilerOptions": {
       "module": "CommonJS"
     }
-  }
+  },
+  "include": [
+    "declaration.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
