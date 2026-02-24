@@ -9,20 +9,20 @@ interface LangSwitcherProps {
 }
 
 export const LangSwitcher: FC<LangSwitcherProps> = (props) => {
-  const {t, i18n} = useTranslation();
-  const {className} = props;
+    const {t, i18n} = useTranslation();
+    const {className} = props;
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
-  }
+    const toggleLanguage = () => {
+        i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
+    }
 
-  return (
-    <Button
-      className={classNames(cls.LangSwitcher, {}, [className])}
-      theme={ThemeButton.CLEAR}
-      onClick={toggleLanguage}
-    >
-      {t("Язык")}
-    </Button>
-  )
+    return (
+        <Button
+            className={classNames(cls.LangSwitcher, {}, [className])}
+            theme={ThemeButton.CLEAR}
+            onClick={toggleLanguage}
+        >
+            {t("Язык")}
+        </Button>
+    )
 };

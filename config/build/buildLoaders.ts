@@ -4,64 +4,78 @@ import {BuildOptions} from "./types/config";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 
 export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
-  // нужен babel если не используется typescript
-  const typescriptLoader = {
-    test: /\.tsx?$/,
-    use: [
-      {
-        loader: 'ts-loader',
-        options: {
-          getCustomTransformers: () => ({
-            before: [options.isDev && ReactRefreshTypeScript()].filter(Boolean),
-          }),
-          transpileOnly: options.isDev,
-        },
-      }
-    ],
-    exclude: /node_modules/,
-  }
 
-  const fileLoader = {
-    test: /\.(png|jpe?g|gif|woff2)$/i,
-    use: [
-      {
-        loader: 'file-loader',
-      },
-    ],
-  }
-
-  const svgLoader = {
-    test: /\.svg$/,
-    use: ['@svgr/webpack'],
-  }
-
-  const cssLoader = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      // Creates `style` nodes from JS strings
-      options.isDev ? "style-loader" : MiniCssExtractPlugin.loader,
-      // Translates CSS into CommonJS
-      {
-        loader: "css-loader",
-        options: {
-          modules: {
-            auto: ((resourcePath: string) => resourcePath.includes('.module.')),
-            localIdentName: options.isDev ?
-              "[path][name]__[local]--[hash:base64:5]"
-              :
-              "[hash:base64]",
-          },
+    const babelLoader = {
+        test: /\.(js|ts|tsx)/,
+        exclude: /node_modules/,
+        use: {
+            loader: "babel-loader",
+            options: {
+                presets: ['@babel/preset-env']
+            }
         }
-      },
-      // Compiles Sass to CSS
-      "sass-loader",
-    ],
-  }
+    }
 
-  return [
-    fileLoader,
-    svgLoader,
-    typescriptLoader,
-    cssLoader,
-  ]
+
+    // нужен babel если не используется typescript
+    const typescriptLoader = {
+        test: /\.tsx?$/,
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    getCustomTransformers: () => ({
+                        before: [options.isDev && ReactRefreshTypeScript()].filter(Boolean),
+                    }),
+                    transpileOnly: options.isDev,
+                },
+            }
+        ],
+        exclude: /node_modules/,
+    }
+
+    const fileLoader = {
+        test: /\.(png|jpe?g|gif|woff2)$/i,
+        use: [
+            {
+                loader: 'file-loader',
+            },
+        ],
+    }
+
+    const svgLoader = {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+    }
+
+    const cssLoader = {
+        test: /\.s[ac]ss$/i,
+        use: [
+            // Creates `style` nodes from JS strings
+            options.isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+            // Translates CSS into CommonJS
+            {
+                loader: "css-loader",
+                options: {
+                    modules: {
+                        auto: ((resourcePath: string) => resourcePath.includes('.module.')),
+                        localIdentName: options.isDev ?
+                            "[path][name]__[local]--[hash:base64:5]"
+                            :
+                            "[hash:base64]",
+                    },
+                }
+            },
+            // Compiles Sass to CSS
+            "sass-loader",
+        ],
+    }
+
+    return [
+        fileLoader,
+        svgLoader,
+        babelLoader,
+        typescriptLoader,
+        cssLoader,
+    ]
 }
