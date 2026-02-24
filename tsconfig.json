@@ -43,6 +43,7 @@
   "include": [
     "declaration.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".eslintrc.js"
   ]
 }
